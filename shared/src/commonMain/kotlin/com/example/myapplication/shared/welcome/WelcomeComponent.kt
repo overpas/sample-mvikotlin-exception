@@ -1,15 +1,19 @@
 package com.example.myapplication.shared.welcome
 
-import com.arkivanov.decompose.value.Value
+import kotlinx.coroutines.flow.StateFlow
 
 interface WelcomeComponent {
 
-    val model: Value<Model>
+    val model: StateFlow<Model>
 
-    fun onUpdateGreetingText()
+    fun plusA()
+
+    fun plusB()
+
     fun onBackClicked()
 
     data class Model(
-        val greetingText: String = "Welcome from Decompose!"
+        val a: String = "a",
+        val b: String = "b",
     )
 }

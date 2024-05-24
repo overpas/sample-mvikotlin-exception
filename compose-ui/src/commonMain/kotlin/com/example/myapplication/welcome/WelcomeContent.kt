@@ -2,6 +2,7 @@ package com.example.myapplication.welcome
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
@@ -12,10 +13,10 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.example.myapplication.shared.welcome.WelcomeComponent
 
 @Composable
@@ -23,7 +24,7 @@ internal fun WelcomeContent(
     component: WelcomeComponent,
     modifier: Modifier = Modifier,
 ) {
-    val model by component.model.subscribeAsState()
+    val model by component.model.collectAsState()
 
     Scaffold(
         modifier = modifier,
@@ -46,10 +47,21 @@ internal fun WelcomeContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Button(
-                onClick = { component.onUpdateGreetingText() },
-            ) {
-                Text(model.greetingText)
+            Row {
+                Button(
+                    onClick = {},
+                ) {
+                    Text("+A")
+                }
+                Text(model.a)
+            }
+            Row {
+                Button(
+                    onClick = {},
+                ) {
+                    Text("+B")
+                }
+                Text(model.b)
             }
         }
     }

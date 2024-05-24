@@ -40,6 +40,10 @@ kotlin {
             dependencies {
                 api(libs.decompose.decompose)
                 api(libs.essenty.lifecycle)
+                api(libs.kotlinx.coroutines)
+                api(libs.mvi.kotlin)
+                api(libs.mvi.kotlin.main)
+                api(libs.mvi.kotlin.extensions.coroutines)
             }
         }
         val commonTest by getting {

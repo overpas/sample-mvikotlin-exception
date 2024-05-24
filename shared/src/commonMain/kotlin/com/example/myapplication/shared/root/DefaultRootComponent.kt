@@ -8,11 +8,17 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.essenty.instancekeeper.getOrCreateSimple
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
+import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.example.myapplication.shared.main.DefaultMainComponent
 import com.example.myapplication.shared.main.MainComponent
 import com.example.myapplication.shared.root.RootComponent.Child
 import com.example.myapplication.shared.welcome.DefaultWelcomeComponent
 import com.example.myapplication.shared.welcome.WelcomeComponent
+import com.example.myapplication.shared.welcome.aStore
+import com.example.myapplication.shared.welcome.bStore
 import kotlinx.serialization.Serializable
 
 class DefaultRootComponent(
@@ -20,6 +26,9 @@ class DefaultRootComponent(
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
+    private val storeFactory: StoreFactory = instanceKeeper.getOrCreateSimple {
+        DefaultStoreFactory()
+    }
 
     override val stack: Value<ChildStack<*, Child>> =
         childStack(
@@ -45,6 +54,12 @@ class DefaultRootComponent(
     private fun welcomeComponent(componentContext: ComponentContext): WelcomeComponent =
         DefaultWelcomeComponent(
             componentContext = componentContext,
+            aStore = componentContext.instanceKeeper.getStore {
+                storeFactory.aStore()
+            },
+            bStore = componentContext.instanceKeeper.getStore {
+                storeFactory.bStore()
+            },
             onFinished = navigation::pop,
         )
 
