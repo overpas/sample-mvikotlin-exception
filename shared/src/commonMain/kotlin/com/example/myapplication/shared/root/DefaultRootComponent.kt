@@ -54,10 +54,10 @@ class DefaultRootComponent(
     private fun welcomeComponent(componentContext: ComponentContext): WelcomeComponent =
         DefaultWelcomeComponent(
             componentContext = componentContext,
-            aStore = componentContext.instanceKeeper.getStore {
+            aStore = componentContext.instanceKeeper.getStore("AStore") {
                 storeFactory.aStore()
             },
-            bStore = componentContext.instanceKeeper.getStore {
+            bStore = componentContext.instanceKeeper.getStore("BStore") {
                 storeFactory.bStore()
             },
             onFinished = navigation::pop,
