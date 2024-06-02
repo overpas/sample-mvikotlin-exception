@@ -30,7 +30,7 @@ class DefaultWelcomeComponent(
 
     init {
         aStore.labels
-            .onEach(::handleLabel)
+            .onEach(::handleLabel) // the callback is not called
             .launchIn(instanceScope)
 //        aStore.labels(observer(onNext = ::handleLabel)) // This works
     }

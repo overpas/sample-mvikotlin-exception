@@ -47,7 +47,7 @@ fun StoreFactory.aStore(): Store<AStore.Intent, AStore.State, AStore.Label> = cr
         onAction<Action.PublishLabel> {
             launch {
 //                delay(100) // With delay it works
-                publish(AStore.Label.LabelPublished)
+                publish(AStore.Label.LabelPublished) // The label is not received in the component
             }
         }
     },
